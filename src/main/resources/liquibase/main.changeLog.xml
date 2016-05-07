@@ -1,0 +1,109 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="createRealtyTable" author="Maksym">
+        <createTable tableName="realty">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="price" type="decimal">
+                <constraints nullable="true"/>
+            </column>
+            <column name="area" type="double">
+                <constraints nullable="true"/>
+            </column>
+            <column name="utility_price" type="decimal">
+                <constraints nullable="true"/>
+            </column>
+            <column name="contact_id" type="uuid">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address_id" type="uuid">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type_id" type="uuid">
+                <constraints nullable="false"/>
+            </column>
+            <column name="room_amount" type="integer">
+                <constraints nullable="true"/>
+            </column>
+            <column name="description" type="varchar(150)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="createTypeTable" author="Maksym">
+        <createTable tableName="type">
+            <column name="id" type="uuid">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="createAddressTable" author="Maksym">
+        <createTable tableName="Address">
+            <column name="id" type="uuid">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="country" type="varchar(20)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="city" type="varchar(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="street" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="house" type="varchar(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="apartments" value="varchar(7)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="createTablePhoto" author="Maksym">
+        <createTable tableName="photo">
+            <column name="id" type="uuid">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="realty_id" type="uuid">
+                <constraints nullable="false"/>
+            </column>
+            <column name="file_id" type="integer">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="createTableContact" author="Maksym">
+        <createTable tableName="Contact">
+            <column name="id" type="uuid">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="user_id" type="uuid">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="addFKToRealty" author="Maksym">
+        <addForeignKeyConstraint baseTableName="realty" baseColumnNames="contact_id" constraintName="contact_id_fk"
+                                 referencedTableName="contact"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="realty" baseColumnNames="address_id" constraintName="address_id_fk"
+                                 referencedTableName="address"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="realty" baseColumnNames="type_id" constraintName="type_id_fk"
+                                 referencedTableName="type"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="addFKToPhoto" author="Maksym">
+        <addForeignKeyConstraint baseTableName="photo" baseColumnNames="realty_id" constraintName="realty_id_fk"
+                                 referencedTableName="realty"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

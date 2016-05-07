@@ -1,0 +1,37 @@
+group 'com.springama'
+version '1.0-SNAPSHOT'
+
+buildscript {
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.liquibase:liquibase-gradle-plugin:1.1.0")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'liquibase'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+
+}
+
+liquibase {
+    activities {
+        main {
+            changeLogFile "src/main/resources/liquibase/main.changeLog.xml"
+            url "jdbc:mysql://localhost:3306/"
+            username "root"
+            password "1234"
+            driver "com.mysql.jdbc.Driver"
+        }
+    }
+}
