@@ -2,18 +2,21 @@ group 'com.springama'
 version '1.0-SNAPSHOT'
 
 buildscript {
-
     repositories {
         mavenCentral()
     }
     dependencies {
-        classpath("org.liquibase:liquibase-gradle-plugin:1.1.0")
+        classpath('org.liquibase:liquibase-gradle-plugin:1.1.1') {
+            exclude(module: 'liquibase-core')   // exclude the dependency on liquibase-core:3.3.5
+        }
+        classpath('org.liquibase:liquibase-core:3.4.0')
+        classpath ("mysql:mysql-connector-java:5.1.38")
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'idea'
-apply plugin: 'liquibase'
+apply plugin: 'org.liquibase.gradle'
 
 repositories {
     mavenCentral()
@@ -25,13 +28,14 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
     compile("org.springframework.boot:spring-boot-starter-web:1.4.0.M2")
+    compile ("mysql:mysql-connector-java:5.1.38")
 }
 
 liquibase {
     activities {
         main {
             changeLogFile "src/main/resources/liquibase/main.changeLog.xml"
-            url "jdbc:mysql://localhost:3306/"
+            url "jdbc:mysql://localhost:3306/real_estate_agency"
             username "root"
             password "1234"
             driver "com.mysql.jdbc.Driver"

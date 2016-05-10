@@ -62,7 +62,7 @@
             <column name="house" type="varchar(10)">
                 <constraints nullable="false"/>
             </column>
-            <column name="apartments" value="varchar(7)">
+            <column name="apartments" type="varchar(7)">
                 <constraints nullable="true"/>
             </column>
         </createTable>
