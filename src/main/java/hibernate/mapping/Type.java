@@ -15,7 +15,6 @@ import java.util.Set;
 public class Type {
     private String id;
     private String name;
-    @OneToMany(mappedBy = "realty")
     private Set<Realty> realtySet;
 
     @Id
@@ -37,11 +36,12 @@ public class Type {
         this.name = name;
     }
 
+    @OneToMany(mappedBy = "type")
     public Set<Realty> getRealtySet() {
         return realtySet;
     }
 
-    public void setRealtySet(Set<Realty> realties) {
-        this.realtySet = realties;
+    public void setRealtySet(Set<Realty> realtySet) {
+        this.realtySet = realtySet;
     }
 }

@@ -16,9 +16,9 @@ public class Realty {
     private double utilityPrice;
     private int roomAmount;
     private String description;
-    private Address addressId;
-    private Contact contactId;
-    private Type typeId;
+    private Address address;
+    private Contact contact;
+    private Type type;
 
     @Id
     @GeneratedValue(generator = "uuid")
@@ -72,30 +72,32 @@ public class Realty {
     }
 
     @OneToOne(mappedBy = "realty", cascade = CascadeType.ALL)
-    public Address getAddressId() {
-        return addressId;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setAddressId(Address addressId) {
-        this.addressId = addressId;
+    public void setAddress(Address addressId) {
+        this.address = addressId;
     }
+
 
     @ManyToOne(cascade = CascadeType.ALL)
-    public Contact getContactId() {
-        return contactId;
+    @JoinColumn(name = "contactId")
+    public Contact getContact() {
+        return contact;
     }
 
-    public void setContactId(Contact contactId) {
-        this.contactId = contactId;
+    public void setContact(Contact contactId) {
+        this.contact = contactId;
     }
 
     @ManyToOne
-    @JoinColumn(name = "id")
-    public Type getTypeId() {
-        return typeId;
+    @JoinColumn(name = "typeId")
+    public Type getType() {
+        return type;
     }
 
-    public void setTypeId(Type typeId) {
-        this.typeId = typeId;
+    public void setType(Type typeId) {
+        this.type = typeId;
     }
 }

@@ -8,6 +8,8 @@
         </property>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/real_estate_agency</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">1234</property>
         <mapping class="hibernate.mapping.Address"/>
         <mapping class="hibernate.mapping.Contact"/>
         <mapping class="hibernate.mapping.Photo"/>

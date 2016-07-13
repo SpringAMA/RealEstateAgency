@@ -116,4 +116,7 @@
                                  referencedTableName="address"
                                  referencedColumnNames="id"/>
     </changeSet>
+    <changeSet id="alterTypeIdSize" author="Maksym">
+        <modifyDataType tableName="type" columnName="id" newDataType="varchar(36)"/>
+    </changeSet>
 </databaseChangeLog>

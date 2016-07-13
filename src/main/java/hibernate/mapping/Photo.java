@@ -13,7 +13,6 @@ public class Photo {
     private int fileId;
     private Realty realty;
 
-
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
@@ -34,6 +33,7 @@ public class Photo {
     }
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "realtyId")
     public Realty getRealty() {
         return realty;
     }
