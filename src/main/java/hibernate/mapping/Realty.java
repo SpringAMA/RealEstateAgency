@@ -2,12 +2,10 @@ package hibernate.mapping;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
- * Created by Maks on 24.06.2016.
+ * Created by Maks on 13.07.2016.
  */
 @Entity
 public class Realty {
@@ -16,21 +14,11 @@ public class Realty {
     private double price;
     private double area;
     private double utilityPrice;
-    private int telephoneNumb;
     private int roomAmount;
     private String description;
-
-    public Realty(double price, double area, double utilityPrice, int telephoneNumb, int roomAmount, String description) {
-        this.price = price;
-        this.area = area;
-        this.utilityPrice = utilityPrice;
-        this.telephoneNumb = telephoneNumb;
-        this.roomAmount = roomAmount;
-        this.description = description;
-    }
-
-    public Realty() {
-    }
+    private Address addressId;
+    private Contact contactId;
+    private Type typeId;
 
     @Id
     @GeneratedValue(generator = "uuid")
@@ -67,14 +55,6 @@ public class Realty {
         this.utilityPrice = utilityPrice;
     }
 
-    public int getTelephoneNumb() {
-        return telephoneNumb;
-    }
-
-    public void setTelephoneNumb(int telephoneNumb) {
-        this.telephoneNumb = telephoneNumb;
-    }
-
     public int getRoomAmount() {
         return roomAmount;
     }
@@ -89,5 +69,33 @@ public class Realty {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @OneToOne(mappedBy = "realty", cascade = CascadeType.ALL)
+    public Address getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(Address addressId) {
+        this.addressId = addressId;
+    }
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    public Contact getContactId() {
+        return contactId;
+    }
+
+    public void setContactId(Contact contactId) {
+        this.contactId = contactId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "id")
+    public Type getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(Type typeId) {
+        this.typeId = typeId;
     }
 }

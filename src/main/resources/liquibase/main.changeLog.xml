@@ -106,4 +106,14 @@
                                  referencedTableName="realty"
                                  referencedColumnNames="id"/>
     </changeSet>
+    <changeSet id="alterRealtyColNames" author="Maksym">
+        <dropForeignKeyConstraint baseTableName="realty" constraintName="addressIdFk"/>
+        <renameColumn tableName="realty"
+                      oldColumnName="addressID"
+                      newColumnName="addressId"
+                      columnDataType="uuid"/>
+        <addForeignKeyConstraint baseTableName="realty" baseColumnNames="addressId" constraintName="addressIdFk"
+                                 referencedTableName="address"
+                                 referencedColumnNames="id"/>
+    </changeSet>
 </databaseChangeLog>

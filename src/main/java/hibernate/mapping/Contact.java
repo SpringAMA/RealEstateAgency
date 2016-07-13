@@ -8,11 +8,9 @@ import javax.persistence.*;
  * Created by Maks on 13.07.2016.
  */
 @Entity
-public class Photo {
+public class Contact {
     private String id;
-    private int fileId;
-    private Realty realty;
-
+    private String userId;
 
     @Id
     @GeneratedValue(generator = "uuid")
@@ -25,21 +23,12 @@ public class Photo {
         this.id = id;
     }
 
-    public int getFileId() {
-        return fileId;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setFileId(int fileId) {
-        this.fileId = fileId;
-    }
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    public Realty getRealty() {
-        return realty;
-    }
-
-    public void setRealty(Realty realty) {
-        this.realty = realty;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
 }
